@@ -1,63 +1,63 @@
 <template>
-  <div class="min-h-screen bg-gray-50 p-6">
+  <div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8">
     <div class="max-w-7xl mx-auto">
-      <div class="flex justify-between items-center mb-8">
-        <h2 class="text-3xl font-semibold text-gray-800">Dashboard - Gestión de Doctores</h2>
-        <div class="flex space-x-4">
+      <div class="flex justify-between items-center mb-10">
+        <h2 class="text-4xl font-light text-slate-800">Dashboard - Gestión de Doctores</h2>
+        <div class="flex space-x-6">
           <button @click="createBackup" 
-                  class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                  class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
             Guardar Backup
           </button>
           <button @click="openRestoreModal" 
-                  class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                  class="bg-violet-600 hover:bg-violet-700 text-white font-medium py-3 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
             Restaurar Backup
           </button>
           <button @click="logout" 
-                  class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                  class="bg-slate-700 hover:bg-slate-800 text-white font-medium py-3 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
             Cerrar Sesión
           </button>
         </div>
       </div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <!-- Formulario -->
-        <div class="bg-white rounded-2xl shadow-lg p-6">
-          <h3 class="text-xl font-semibold text-gray-800 mb-4">Agregar Doctor</h3>
-          <form @submit.prevent="addDoctor" class="space-y-4">
+        <div class="bg-white rounded-3xl shadow-xl p-8 border border-slate-200">
+          <h3 class="text-2xl font-light text-slate-800 mb-6">Agregar Doctor</h3>
+          <form @submit.prevent="addDoctor" class="space-y-6">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+              <label class="block text-sm font-medium text-slate-600 mb-2">Nombre</label>
               <input v-model="newDoctor.name" 
-                     class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" 
+                     class="w-full px-4 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition-all duration-300 bg-slate-50" 
                      placeholder="Nombre del doctor" required />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Licencia</label>
+              <label class="block text-sm font-medium text-slate-600 mb-2">Licencia</label>
               <input v-model="newDoctor.license" 
-                     class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" 
+                     class="w-full px-4 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition-all duration-300 bg-slate-50" 
                      placeholder="Número de licencia" required />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">Especialidad</label>
+              <label class="block text-sm font-medium text-slate-600 mb-2">Especialidad</label>
               <input v-model="newDoctor.specialty" 
-                     class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" 
+                     class="w-full px-4 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition-all duration-300 bg-slate-50" 
                      placeholder="Especialidad médica" required />
             </div>
             <button type="submit" 
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                    class="w-full bg-slate-700 hover:bg-slate-800 text-white font-medium py-4 px-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
               Agregar
             </button>
           </form>
         </div>
         <!-- Tabla -->
-        <div class="bg-white rounded-2xl shadow-lg p-6">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-semibold text-gray-800">Lista de Doctores</h3>
-            <div class="flex space-x-2">
+        <div class="bg-white rounded-3xl shadow-xl p-8 border border-slate-200">
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-light text-slate-800">Lista de Doctores</h3>
+            <div class="flex space-x-4">
               <button @click="deleteAllDoctors" 
-                      class="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                      class="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
                 Eliminar Todos
               </button>
               <button @click="fetchDoctors" 
-                      class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                      class="bg-slate-600 hover:bg-slate-700 text-white font-medium py-2 px-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
                 Refrescar
               </button>
             </div>
@@ -65,25 +65,25 @@
           <div class="overflow-x-auto">
             <table class="w-full table-auto">
               <thead>
-                <tr class="bg-gray-100">
-                  <th class="px-4 py-3 text-left text-sm font-medium text-gray-700 rounded-tl-xl">Nombre</th>
-                  <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Licencia</th>
-                  <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Especialidad</th>
-                  <th class="px-4 py-3 text-left text-sm font-medium text-gray-700 rounded-tr-xl">Acciones</th>
+                <tr class="bg-slate-100">
+                  <th class="px-6 py-4 text-left text-sm font-medium text-slate-700 rounded-tl-2xl">Nombre</th>
+                  <th class="px-6 py-4 text-left text-sm font-medium text-slate-700">Licencia</th>
+                  <th class="px-6 py-4 text-left text-sm font-medium text-slate-700">Especialidad</th>
+                  <th class="px-6 py-4 text-left text-sm font-medium text-slate-700 rounded-tr-2xl">Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="doctor in doctors" :key="doctor.id" class="border-b border-gray-200 hover:bg-gray-50">
-                  <td class="px-4 py-3 text-sm text-gray-800">{{ doctor.name }}</td>
-                  <td class="px-4 py-3 text-sm text-gray-800">{{ doctor.license }}</td>
-                  <td class="px-4 py-3 text-sm text-gray-800">{{ doctor.specialty }}</td>
-                  <td class="px-4 py-3 text-sm">
+                <tr v-for="doctor in doctors" :key="doctor.id" class="border-b border-slate-200 hover:bg-slate-50">
+                  <td class="px-6 py-4 text-sm text-slate-800">{{ doctor.name }}</td>
+                  <td class="px-6 py-4 text-sm text-slate-800">{{ doctor.license }}</td>
+                  <td class="px-6 py-4 text-sm text-slate-800">{{ doctor.specialty }}</td>
+                  <td class="px-6 py-4 text-sm">
                     <button @click="editDoctor(doctor)" 
-                            class="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-3 rounded-lg mr-2 transition-all">
+                            class="bg-amber-500 hover:bg-amber-600 text-white py-2 px-4 rounded-xl mr-3 transition-all duration-300">
                       Editar
                     </button>
                     <button @click="deleteDoctor(doctor.id)" 
-                            class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-lg transition-all">
+                            class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-xl transition-all duration-300">
                       Eliminar
                     </button>
                   </td>
@@ -96,34 +96,34 @@
     </div>
     <!-- Modal para editar -->
     <div v-if="editingDoctor" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md">
-        <h3 class="text-xl font-semibold text-gray-800 mb-4">Editar Doctor</h3>
-        <form @submit.prevent="updateDoctor" class="space-y-4">
+      <div class="bg-white rounded-3xl shadow-xl p-8 w-full max-w-md border border-slate-200">
+        <h3 class="text-2xl font-light text-slate-800 mb-6">Editar Doctor</h3>
+        <form @submit.prevent="updateDoctor" class="space-y-6">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+            <label class="block text-sm font-medium text-slate-600 mb-2">Nombre</label>
             <input v-model="editingDoctor.name" 
-                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" 
+                   class="w-full px-4 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition-all duration-300 bg-slate-50" 
                    required />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Licencia</label>
+            <label class="block text-sm font-medium text-slate-600 mb-2">Licencia</label>
             <input v-model="editingDoctor.license" 
-                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" 
+                   class="w-full px-4 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition-all duration-300 bg-slate-50" 
                    required />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Especialidad</label>
+            <label class="block text-sm font-medium text-slate-600 mb-2">Especialidad</label>
             <input v-model="editingDoctor.specialty" 
-                   class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" 
+                   class="w-full px-4 py-4 border border-slate-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition-all duration-300 bg-slate-50" 
                    required />
           </div>
           <div class="flex space-x-4">
             <button type="submit" 
-                    class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                    class="flex-1 bg-slate-700 hover:bg-slate-800 text-white font-medium py-4 px-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
               Actualizar
             </button>
             <button type="button" @click="cancelEdit" 
-                    class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                    class="flex-1 bg-slate-500 hover:bg-slate-600 text-white font-medium py-4 px-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
               Cancelar
             </button>
           </div>
@@ -132,29 +132,29 @@
     </div>
     <!-- Modal para restaurar backup -->
     <div v-if="showRestoreModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div class="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md">
-        <h3 class="text-xl font-semibold text-gray-800 mb-4">Restaurar Copia de Seguridad</h3>
-        <div v-if="backups.length === 0" class="text-center text-gray-600">
+      <div class="bg-white rounded-3xl shadow-xl p-8 w-full max-w-md border border-slate-200">
+        <h3 class="text-2xl font-light text-slate-800 mb-6">Restaurar Copia de Seguridad</h3>
+        <div v-if="backups.length === 0" class="text-center text-slate-500">
           No hay copias de seguridad disponibles.
         </div>
-        <div v-else class="space-y-2">
-          <div v-for="backup in backups" :key="backup.id" class="flex justify-between items-center p-3 bg-gray-100 rounded-lg">
-            <span class="text-sm text-gray-800">{{ backup.name }}</span>
-            <div class="flex space-x-2">
+        <div v-else class="space-y-3">
+          <div v-for="backup in backups" :key="backup.id" class="flex justify-between items-center p-4 bg-slate-50 rounded-2xl">
+            <span class="text-sm text-slate-800">{{ backup.name }}</span>
+            <div class="flex space-x-3">
               <button @click="restoreBackup(backup)" 
-                      class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded-lg text-sm transition-all">
+                      class="bg-slate-700 hover:bg-slate-800 text-white py-2 px-4 rounded-xl text-sm transition-all duration-300">
                 Restaurar
               </button>
               <button @click="deleteBackup(backup.id)" 
-                      class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-lg text-sm transition-all">
+                      class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-xl text-sm transition-all duration-300">
                 Eliminar
               </button>
             </div>
           </div>
         </div>
-        <div class="flex justify-end mt-4">
+        <div class="flex justify-end mt-6">
           <button @click="showRestoreModal = false" 
-                  class="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-200">
+                  class="bg-slate-500 hover:bg-slate-600 text-white font-medium py-3 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
             Cerrar
           </button>
         </div>

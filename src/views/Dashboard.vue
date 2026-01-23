@@ -145,10 +145,6 @@
                       class="bg-slate-700 hover:bg-slate-800 text-white py-2 px-4 rounded-xl text-sm transition-all duration-300">
                 Restaurar
               </button>
-              <button @click="deleteBackup(backup.id)" 
-                      class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-xl text-sm transition-all duration-300">
-                Eliminar
-              </button>
             </div>
           </div>
         </div>
@@ -295,19 +291,6 @@ const deleteAllDoctors = async () => {
   } else {
     alert('Todos los doctores han sido eliminados')
     await fetchDoctors()
-  }
-}
-
-const deleteBackup = async (id) => {
-  const confirmDelete = confirm('¿Estás seguro de eliminar esta copia de seguridad?')
-  if (!confirmDelete) return
-
-  const { error } = await supabase.from('backups').delete().eq('id', id)
-  if (error) {
-    alert('Error al eliminar backup: ' + error.message)
-  } else {
-    alert('Copia de seguridad eliminada')
-    await fetchBackups() // Refrescar la lista en el modal
   }
 }
 
